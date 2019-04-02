@@ -16,58 +16,49 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        showPoints(1, teamAScore);
-        showPoints(2, teamBScore);
     }
 
     public void add3ToTeamA(View view) {
-        teamAScore = teamAScore + 3;
-        showPoints(1, teamAScore);
+        addAndShowPoints(1, 3);
     }
 
     public void add2ToTeamA(View view) {
-        teamAScore = teamAScore + 2;
-        showPoints(1, teamAScore);
+        addAndShowPoints(1, 2);
     }
 
     public void addFreeThrowToTeamA(View view) {
-        teamAScore = teamAScore + randomizer();
-        showPoints(1, teamAScore);
+        addAndShowPoints(1, randomizer());
     }
 
     public void add3ToTeamB(View view) {
-        teamBScore = teamBScore + 3;
-        showPoints(2, teamBScore);
+        addAndShowPoints(2, 3);
     }
 
     public void add2ToTeamB(View view) {
-        teamBScore = teamBScore + 2;
-        showPoints(2, teamBScore);
+        addAndShowPoints(2, 2);
     }
 
     public void addFreeThrowToTeamB(View view) {
-        int numbefore = teamBScore;
-        teamBScore = teamBScore + randomizer();
-        int numAfter = teamBScore;
-        int randomNum = numAfter - numbefore;
-        if(randomNum >= 0 && randomNum <= 3) {
-            showPoints(2, teamBScore);
-        }
+        addAndShowPoints(2, randomizer());
     }
 
     public void resetScore(View view) {
         teamAScore = 0;
-        showPoints(1, teamAScore);
+        addAndShowPoints(1, teamAScore);
         teamBScore = 0;
-        showPoints(2, teamBScore);
+        addAndShowPoints(2, teamBScore);
     }
 
-    private void showPoints(int flag, int points) {
+    private void addAndShowPoints(int flag, int value) {
         TextView teamScore = findViewById(R.id.TeamAScore);
+        int points = 0;
         if (flag == 1) {
+            teamAScore += value;
+            points = teamAScore;
             teamScore = findViewById(R.id.TeamAScore);
         } else if (flag == 2) {
+            teamBScore += value;
+            points = teamBScore;
             teamScore = findViewById(R.id.TeamBScore);
         }
         String scoreInString = ("" + points);
